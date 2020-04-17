@@ -12,11 +12,11 @@
 
 
                <div class="form-check" >
-                    <input id="v1" class="form-check-input" type="radio" v-bind:value="answer1" v-model="choices" v-on:change="chosen(choices, id)">
+                    <input id="v1" class="form-check-input" type="radio" v-bind:value="answer1" v-model="choices" v-on:change="chosen(choices, id)" v-on:click="optionClicked(answer1)">
                     <label class="form-check-label" for="v1">{{answer1}}</label>
                 </div>
                 <div class="form-check" id="selection">
-                    <input id="v2" class="form-check-input" type="radio" v-bind:value="answer2" v-model="choices" v-on:change="chosen(choices,id)">
+                    <input id="v2" class="form-check-input" type="radio" v-bind:value="answer2" v-model="choices" v-on:change="chosen(choices,id)" v-on:click="optionClicked(answer2)">
                     <label class="form-check-label" for="v2">{{answer2}}</label>
                 </div>
 
@@ -27,11 +27,11 @@
 
             <div v-if="id===1" id="selection">
                 <div class="form-check">
-                    <input id="v1" class="form-check-input" type="radio" v-bind:value="answer1" v-model="choices" v-on:change="chosen(choices, id)">
+                    <input id="v1" class="form-check-input" type="radio" v-bind:value="answer1" v-model="choices" v-on:change="chosen(choices, id)" v-on:click="optionClicked(answer1)">
                     <label class="form-check-label" for="v1">{{answer1}}</label>
                 </div>
                 <div class="form-check" >
-                    <input id="v2" class="form-check-input" type="radio" v-bind:value="answer2" v-model="choices" v-on:change="chosen(choices,id)">
+                    <input id="v2" class="form-check-input" type="radio" v-bind:value="answer2" v-model="choices" v-on:change="chosen(choices,id)" v-on:click="optionClicked(answer2)">
                     <label class="form-check-label" for="v2">{{answer2}}</label>
                 </div>
 
@@ -40,11 +40,11 @@
 
             <div v-if="id===2" id="selection">
                 <div class="form-check">
-                    <input id="v1" class="form-check-input" type="radio" v-bind:value="answer1" v-model="choices" v-on:change="chosen(choices, id)">
+                    <input id="v1" class="form-check-input" type="radio" v-bind:value="answer1" v-model="choices" v-on:change="chosen(choices, id)" v-on:click="optionClicked(answer1)">
                     <label class="form-check-label" for="v1">{{answer1}}</label>
                 </div>
                 <div class="form-check" id="selection">
-                    <input id="v2" class="form-check-input" type="radio" v-bind:value="answer2" v-model="choices" v-on:change="chosen(choices,id)">
+                    <input id="v2" class="form-check-input" type="radio" v-bind:value="answer2" v-model="choices" v-on:change="chosen(choices,id)" v-on:click="optionClicked(answer2)">
                     <label class="form-check-label" for="v2">{{answer2}}</label>
                 </div>
             </div>
@@ -75,6 +75,15 @@ export default {
         chosen(choices,id){
             // emit the answer to parents
             this.$emit('answer', choices,id)
+        },
+        optionClicked(answer){
+            if(
+                (answer == this.answer1 && this.choices == this.answer1) ||
+                (answer == this.answer2 && this.choices == this.answer2)
+            ){
+                this.choices = ''
+                this.$emit('answer', choices,id)
+            }
         }
     }
     
